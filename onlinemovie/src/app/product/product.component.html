@@ -1,0 +1,56 @@
+<!-- Search DropDown -->
+<div class="container">
+  <div class="container d-flex">
+    <div class="container d-flex">
+      <nav class="navbar navbar-expand-lg navbar-light col-8">
+        <div class="dropdown show">
+          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Filters
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="navSec">
+              <a (click)="getProducts()" id="allProducts" class="navbar-brand">All Products</a>
+            </div>
+            <div class="navSec">
+              <a (click)="categoryDrama()" id="Drama" class="navbar-brand">Drama</a>
+            </div>
+            <div class="navSec">
+              <a (click)="categoryComedy()" id="Comedy" class="navbar-brand">Comedy</a>
+            </div>
+            <div class="navSec">
+              <a (click)="categoryHistorical()" id="Historical" class="navbar-brand">Historical</a>
+            </div>
+            <div class="navSec">
+              <a (click)="categoryThriller()" id="Thriller" class="navbar-brand">Thriller</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div style="margin-right: -20vw">
+        <input type="text" class="form-control" name="searchKey" [(ngModel)]="searchKey" (ngModelChange)="Search()"
+          placeholder="Search Product" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="movieCardBox">
+  <mat-card class="movie-card" *ngFor="let movie of products" >
+      <img mat-card-image [src]="movie.imagepath" alt="movieImage" [ngStyle]="{height:'65%'}">
+      <mat-card-content class="movie-card-details" >
+          <p>Cast: {{movie.desc}}</p>
+          <p>Duration: {{movie.durations}} </p>
+          <button *ngIf="login == 0" class="align-self-end mt-auto btn addcart btn-primary" (click)="showToLogin()">
+            Book
+          </button>
+          <button *ngIf="login == 1" class="align-self-end mt-auto btn addcart btn-primary" (click)="addToCart(movie)"
+            id="addToCart">
+            Book
+          </button>
+      </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,155 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div>
+      <img routerLink="/products" class="logo"
+        src="https://cdn2.iconfinder.com/data/icons/arts-and-music/96/Movie_camera-512.png" alt="navbarImage"
+        style="height: 5vh; width: 5vw; margin-bottom: 6vh; margin-left: 5vw;" /><span
+        style="font-weight: bolder; font-size: 25px;">G5 Movies</span>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" style="font-family: 'Montserrat', sans-serif">
+        <li class="nav-item">
+          <button class="btn bthHead active">
+            Manage Movies
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" (click)="clickAddProduct()" data-toggle="modal" data-target="#exampleModal"
+            class="btn bthHead ">
+            Add movies
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead" routerLink="/manageCustomer">
+            Manage Users
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead" routerLink="/managePurchase">
+            Manage Purchases
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead float-right" (click)="adminLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <hr />
+</div>
+
+<div>
+  <div class="container admind">
+    <span class="text-center prodLogo">Movies List</span>
+  </div>
+  <table class="table table-striped admind" matSort (matSortChange)="sortData($event)">
+    <thead>
+      <tr>
+        <th style="width: 17%" mat-sort-header="name">
+          movie Name <i class="fas fa-sort"></i>
+        </th>
+        <th style="width: 20%">Description</th>
+        <th mat-sort-header="durations">Durations</th>
+        <th mat-sort-header="category">category</th>
+        <th mat-sort-header="price">price <i class="fas fa-sort"></i></th>
+        <th mat-sort-header="avail">Availabilty <i class="fas fa-sort"></i></th>
+        <th style="width: 15%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of sortedProd">
+        <td>{{ product.name }}</td>
+        <td>{{ product.desc }}</td>
+        <td value="true">{{ product.durations }}</td>
+        <td class="makecenter">{{ product.category }}</td>
+        <td class="makeCenter">₹{{ product.price }}</td>
+        <td class="makeCenter">
+          <i *ngIf="product.avail == 'no'" class="fas fa-times"></i>
+          <i *ngIf="product.avail == 'yes'" class="fas fa-check"></i>
+        </td>
+        <td style="padding-left: 4.4vw;">
+          <mat-icon (click)="onEdit(product)" type="button" data-toggle="modal" data-target="#exampleModal"> border_color</mat-icon>
+          <mat-icon (click)="deleteProduct(product)" type="button" style="margin-left: 2vw">restore_from_trash</mat-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--Add Employee Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title float-left" id="exampleModalLabel">Movies Details</span>
+        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <p *ngIf="message != ''">{{ message }}</p>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="form-group">
+            <label for="name" class="col-form-label"> Movie Name</label>
+            <input type="text" formControlName="name" class="form-control" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="desc" class="col-form-label">Description</label>
+            <input type="text" formControlName="desc" class="form-control" id="desc" required />
+          </div>
+          <div class="form-group">
+            <label for="durations" class="col-form-label">Duration</label>
+            <input type="text" formControlName="durations" class="form-control" id="durations" required />
+          </div>
+          <div class="form-group">
+            <label for="categery" class="col-form-label">Category</label>
+            <select type="text" name="category" formControlName="category" class="form-control" id="category" required>
+              <option value="Drama">Drama</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Historical">Historical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="actualPrice" class="col-form-label">Price</label>
+            <input type="text" formControlName="actualPrice" class="form-control" id="actualPrice" required />
+          </div>
+          <div class="form-group">
+            <label for="discount" class="col-form-label">Discount</label>
+            <input type="text" formControlName="discount" class="form-control" id="discount" required />
+          </div>
+          <div class="form-group">
+            <label for="avail" class="form-check-label">Availabilty</label>
+            <div class="form-check">
+              <input type="radio" value="yes" formControlName="avail" name="avail" class="form-check-input" id="yes" />
+              <label class="form-check-label" for="avail"> Enable </label>
+              <input style="margin-left: 30px" type="radio" value="no" formControlName="avail" name="avail"
+                class="form-check-input" id="no" />
+              <label style="margin-left: 48px" class="form-check-label" for="avail">
+                Disable
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="imagepath" class="col-form-label">Image Link</label>
+            <input type="text" formControlName="imagepath" class="form-control" id="imagepath" required />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p *ngIf="message != ''" class="text-left">{{ message }}</p>
+        <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" *ngIf="showAdd" (click)="addProduct()" class="btn btn-primary">
+          Add
+        </button>
+        <button type="button" *ngIf="showUpdate" (click)="updateProduct()" class="btn btn-primary">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

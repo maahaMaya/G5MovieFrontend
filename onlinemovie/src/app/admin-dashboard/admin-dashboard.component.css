@@ -1,0 +1,73 @@
+.logo{
+    position:relative;
+    top: 8px;
+    height: 40px;
+    width: 52px;
+    cursor: pointer;
+}
+.header-title{
+    position: relative;
+    top: 8px;
+    left:25px;
+    font-family: 'WindSong', cursive;
+    font-size: 32px;
+    color: black;
+}
+.bthHead{
+    margin-left: 10px;
+}
+
+.active, .bthHead:hover{
+    color: #bf1e2e;
+}
+
+hr{
+    margin: 0;
+}
+.prodLogo{
+    position: relative;
+    top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    margin-left: 29vw;
+}
+
+.AddProd{
+    margin: 10px;
+}
+
+.makeCenter{
+    text-align: center;
+}
+
+.form-check-input{
+    margin-top: 3px;
+}
+
+p{
+    color: red;
+}
+
+.modal-title{
+    font-size: 18px;
+}
+
+th{
+    text-align: center;
+}
+
+.admind{
+    color: rgb(54, 36, 36);
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 3vh;
+}
+
+.logo{
+    position:relative;
+    top: 2vh;
+    height: 8vh;
+    width: 50vw;
+    cursor: pointer;
+    font-size: 2rem;
+    font-family: 'Bungee Spice', cursive;
+}
