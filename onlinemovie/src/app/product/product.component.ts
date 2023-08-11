@@ -14,7 +14,7 @@ import { LogService } from '../log.service';
 export class ProductComponent implements OnInit {
   searchKey: string = '';
   login: number = 0;
-  products!: Product[];
+  products?: Product[];
 
   setAutoHide: boolean = true;
   autoHide: number = 2000;
@@ -53,23 +53,39 @@ export class ProductComponent implements OnInit {
   }
 
   categoryDrama() {
-    // Implementation for Drama category
+    this.productService.getDrama().subscribe((data) => {
+      this.products = data;
+    })
   }
 
   categoryComedy() {
-    // Implementation for Comedy category
+    this.productService.getComedy().subscribe((data) => {
+      this.products = data;
+    })
   }
 
   categoryHistorical() {
-    // Implementation for Historical category
+    this.productService.getHistorical().subscribe((data) => {
+      this.products = data;
+    })
   }
 
   categoryThriller() {
-    // Implementation for Thriller category
+    this.productService.getThriller().subscribe((data) => {
+      this.products = data;
+    })
   }
 
   Search() {
-    // Implementation for Search
+    if(this.searchKey === ""){
+      this.getProducts();
+    }
+    else{
+      this.productService.searchProduct(this.searchKey).subscribe((data) => {
+        this.products = data;
+        console.log(data)
+      })
+    }
   }
 
   showToLogin() {

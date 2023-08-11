@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     private purchaseService: PurchaseService,
     private formbuilder: FormBuilder,
     private router: Router
-  ) {this.customer = new Customer('', '', '', '', '');}
+  ) { this.customer = new Customer('', '', '', '', ''); }
 
   ngOnInit(): void {
     this.logService.headerId$.subscribe((id) => {
@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
         sessionStorage.setItem('cust_name', this.customer.name);
         //edit
         //this.logService.sendId(this.customer.email);
-        
+
         let ref = document.getElementById('Rcancel');
         ref?.click();
         this.formValue.reset();
@@ -106,16 +106,15 @@ export class HeaderComponent implements OnInit {
 
   loginSubmit() {
     if (this.loginData.email.trim() === '' || this.loginData.email === null) {
-      this.message = 'Enter Username';
+      this.message = 'Enter Email';
       return;
     }
-    if (
-      this.loginData.password.trim() === '' ||
-      this.loginData.password === null
+    if (this.loginData.password.trim() === '' || this.loginData.password === null
     ) {
       this.message = 'Enter password';
       return;
     }
+    
     this.customerService.customerLogin(this.loginData).subscribe((data) => {
       this.auth = data;
       if (this.auth === true) {

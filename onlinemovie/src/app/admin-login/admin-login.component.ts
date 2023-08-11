@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class AdminLoginComponent implements OnInit {
   formValue !: FormGroup;
-  adminData!:any;
   error:String='';
   loginData={
     username:'',
     password:''
   }
+  //strore login input boolean value
   auth:any;
 
   constructor(private logService:LogService, private adminService:AdminService, private router:Router) { }
@@ -24,6 +24,8 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
     this.logService.sendHeader(0);
   }
+
+  //admin login method
   loginSubmit(){
     if(this.loginData.username.trim()==''||this.loginData.username==null){
       this.error="Enter Username";

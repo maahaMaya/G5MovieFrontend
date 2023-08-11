@@ -87,12 +87,14 @@ export class AdminDashboardComponent implements OnInit {
 
 
 
+  //addProduct buttom click
   clickAddProduct() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
 
+  //adding product
   addProduct() {
     if (
       !this.formValue.value.name ||
@@ -127,6 +129,7 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
+  //to enter data in form for update
   onEdit(prod: any) {
     this.showAdd = false;
     this.showUpdate = true;
@@ -141,6 +144,7 @@ export class AdminDashboardComponent implements OnInit {
     this.formValue.controls['imagepath'].setValue(prod.imagepath);
   }
 
+  //update product
   updateProduct() {
     if (
       !this.formValue.value.name ||
@@ -167,6 +171,7 @@ export class AdminDashboardComponent implements OnInit {
       .subscribe(
         (res) => {
           alert('Product Updated Successfully');
+          //
           let ref = document.getElementById('cancel');
           ref?.click();
           this.formValue.reset();
@@ -178,6 +183,7 @@ export class AdminDashboardComponent implements OnInit {
       );
   }
 
+  //delete product
   deleteProduct(prod: any) {
     this.productService.deleteProduct(prod.id).subscribe(
       (res) => {
@@ -190,6 +196,7 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
+  //admin logout
   adminLogout() {
     this.logService.sendId('');
     this.router.navigate(['/admin']);

@@ -9,7 +9,6 @@ import { BehaviorSubject,Observable } from 'rxjs';
 export class ProductService {
   public login = new BehaviorSubject<any>([]);
   private baseURL = "http://localhost:8084/products";
-  private adminURL= "http://localhost:8084/AdminProducts";
   constructor(private httpClient: HttpClient) { }
   
   getLogin(){
@@ -58,5 +57,9 @@ export class ProductService {
 
   deleteProduct(id:number):Observable<Product>{
     return this.httpClient.delete<Product>(`${this.baseURL}/${id}`);
+  }
+
+  searchProduct(keyword:any):Observable<Product[]>{
+    return this.httpClient.get<Product[]>(`${this.baseURL}/search/${keyword}`);
   }
 }
