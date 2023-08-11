@@ -1,3 +1,4 @@
+<!-- Movies Navbar -->
 <div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div>
@@ -21,7 +22,7 @@
         </li>
         <li class="nav-item">
           <button class="btn bthHead" routerLink="/manageCustomer">
-            Manage Users
+            Manage Customer
           </button>
         </li>
         <li class="nav-item">
@@ -40,6 +41,7 @@
   <hr />
 </div>
 
+<!-- Table For Movies -->
 <div>
   <div class="container admind">
     <span class="text-center prodLogo">Movies List</span>
@@ -78,7 +80,7 @@
   </table>
 </div>
 
-<!--Add Employee Modal -->
+<!--Add/Edit Movie Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -138,6 +140,7 @@
           </div>
         </form>
       </div>
+      
       <div class="modal-footer">
         <p *ngIf="message != ''" class="text-left">{{ message }}</p>
         <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">

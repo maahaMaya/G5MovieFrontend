@@ -1,150 +1,128 @@
+<!-- Manage Custome Navbar -->
 <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div>
-        <!-- <img
-          routerLink="/products"
-          class="logo"
-          src="./assets/images/logo3.png"
-          alt=""
-        /> -->
-        <!-- <strong class="header-title">NMS Movies</strong> -->
-        <h2 class="logo">NMS Movies</h2>
-      </div>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <button class="btn btnHead" routerLink="/adminDashboard">
-              <!-- <i class="fas fa-tasks fa-lg"></i> -->
-              Manage movies
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btnHead active">
-              <!-- <i class="fas fa-users fa-lg"></i> -->
-              Manage Users
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btnHead" routerLink="/managePurchase">
-              <!-- <i class="fas fa-shopping-basket fa-lg"></i> -->
-              Manage Purchases
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btnHead float-right" (click)="adminLogout()">
-              <i
-                class="fas fa-sign-out-alt"
-                style="font-size: 30px; color: red"
-              ></i>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <hr />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div>
+      <img routerLink="/products" class="logo"
+        src="https://cdn2.iconfinder.com/data/icons/arts-and-music/96/Movie_camera-512.png" alt="navbarImage"
+        style="height: 5vh; width: 5vw; margin-bottom: 6vh; margin-left: 5vw;" /><span
+        style="font-weight: bolder; font-size: 25px;">G5 Movies</span>
+    </div>
+    <!-- Search Box Customer -->
+    <div>
+      <input type="text" class="form-control" name="searchKey" [(ngModel)]="searchKey"
+      (ngModelChange)="searchCustomer()" placeholder="Search Customer" style="width: 20vw; margin-left: 12vw; border: 1px solid rgb(71, 27, 27);"/>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" style="font-family: 'Montserrat', sans-serif">
+        <li class="nav-item">
+          <button class="btn bthHead" routerLink="/adminDashboard">
+            Manage Movies
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead active" routerLink="/manageCustomer">
+            Manage Customer
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead" routerLink="/managePurchase">
+            Manage Purchases
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn bthHead float-right" (click)="adminLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <hr />
+</div>
+
+
+<!-- Customer Table -->
+<div>
+  <div class="container prodLogo">
+    <span class="text-center" style="color: black;">Users List</span>
   </div>
-  <div>
-    <div class="container">
-      <span class="text-center prodLogo">Users List</span>
-      <input
-        type="text"
-        class="float-right form-control"
-        name="searchKey"
-        [(ngModel)]="searchKey"
-        (ngModelChange)="searchCustomer()"
-        placeholder="Search Customer"
-      />
-    </div>
-    <div class="container">
-      <table class="table table-striped table-bordered" style="color: aliceblue">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Contact No</th>
-            <th>Address</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cust of allCustomers">
-            <td>{{ cust.email }}</td>
-            <td>{{ cust.name }}</td>
-            <td>{{ cust.contact }}</td>
-            <td>{{ cust.address }}</td>
-            <td>
-              <button
-                (click)="getActiveOrders(cust.email)"
-                class="btn btn-primary btn-sm"
-                type="button"
-                data-toggle="modal"
-                data-target="#activeOrders"
-              >
-                View active Orders
-              </button>
-              <button
-                (click)="deleteCustomer(cust.email)"
-                class="btn btn-danger btn-sm"
-                style="margin-left: 3px"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="modal" id="activeOrders">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Previous Orders</h4>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
+  <div class="container">
+    <table class="table table-striped table-bordered" style="color: rgb(30, 41, 51)">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Contact No</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cust of allCustomers">
+          <td>{{ cust.email }}</td>
+          <td>{{ cust.name }}</td>
+          <td>{{ cust.contact }}</td>
+          <td>{{ cust.address }}</td>
+          <td style="display: inline-flex; width: 100%;">
+            <button (click)="getActiveOrders(cust.email)" class="btn btn-success btn-sm" type="button"
+              data-toggle="modal" data-target="#activeOrders">
+              Customer Order
             </button>
+            <mat-icon (click)="deleteCustomer(cust.email)" type="button" style="margin-left: 2vw; color: rgb(158, 23, 23);">restore_from_trash</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Customer All Product Table -->
+  <div class="modal" id="activeOrders">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Previous Orders</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div *ngIf="activeOrders.length != 0">
+            <table class="table">
+              <thead class="thead-#bf1e2e">
+                <tr>
+                  <th>movie Name</th>
+                  <th>Quantity</th>
+                  <th>Cost</th>
+                  <th>Purchase Data</th>
+                  <th>Transaction Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pur of activeOrders">
+                  <td>{{ pur.productname }}</td>
+                  <td>{{ pur.quantity }}</td>
+                  <td>{{ pur.totalcost }}</td>
+                  <td>{{ pur.dop }}</td>
+                  <td>{{ pur.transactionid }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-            <div *ngIf="activeOrders.length != 0">
-              <table class="table">
-                <thead class="thead-#bf1e2e">
-                  <tr>
-                    <th>movie Name</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Purchase Data</th>
-                    <th>Transaction Id</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pur of activeOrders">
-                    <td>{{ pur.productname }}</td>
-                    <td>{{ pur.quantity }}</td>
-                    <td>{{ pur.totalcost }}</td>
-                    <td>{{ pur.dop }}</td>
-                    <td>{{ pur.transactionid }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div *ngIf="activeOrders.length == 0">
-              <h5 class="text-center text-danger">No Previous orders</h5>
-            </div>
+          <div *ngIf="activeOrders.length == 0">
+            <h5 class="text-center text-danger">No Previous orders</h5>
           </div>
-  
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-sm btn-danger"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">
+            Close
+          </button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

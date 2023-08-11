@@ -28,6 +28,7 @@
         </div>
       </nav>
 
+      <!-- Search Box -->
       <div style="margin-right: -20vw">
         <input type="text" class="form-control" name="searchKey" [(ngModel)]="searchKey" (ngModelChange)="Search()"
           placeholder="Search Product" />
@@ -37,7 +38,7 @@
   </div>
 </div>
 
-
+<!-- Movie Box -->
 <div class="movieCardBox">
   <mat-card class="movie-card" *ngFor="let movie of products" >
       <img mat-card-image [src]="movie.imagepath" alt="movieImage" [ngStyle]="{height:'65%'}">

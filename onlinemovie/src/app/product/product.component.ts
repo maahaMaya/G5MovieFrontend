@@ -3,6 +3,7 @@ import { CartService } from './../cart.service';
 import { Product } from './../model/product'; // Import Product from correct path
 import { ProductService } from 'src/app/product.service';
 import { Cart } from './../model/cart'; // Import Cart from correct path
+import { LogService } from '../log.service';
 
 @Component({
   selector: 'app-product',
@@ -18,17 +19,18 @@ export class ProductComponent implements OnInit {
   setAutoHide: boolean = true;
   autoHide: number = 2000;
 
+
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private logService: LogService,
   ) {}
 
   ngOnInit(): void {
-    //edit
-    //this.logService.sendHeader(1);
-    // this.productService.login.subscribe((res) => {
-    //   this.login = res;
-    // });
+    this.logService.sendHeader(1);
+    this.productService.login.subscribe((res) => {
+      this.login = res;
+    });
     this.getProducts();
   }
 
