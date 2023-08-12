@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
   products: Cart[] = [];
   activeOrders: Purchase[] = [];
   totalItem: number = 0;
+  customerName? : string;
 
   constructor(
     private cartService: CartService,
@@ -81,14 +82,13 @@ export class HeaderComponent implements OnInit {
 
     this.customerService.addCustomer(this.customer).subscribe(
       (data) => {
-        this.login = 1;
         //edit
         //this.productService.login.next(1);
         sessionStorage.setItem('cust_email', this.customer.email);
         sessionStorage.setItem('cust_name', this.customer.name);
         //edit
         //this.logService.sendId(this.customer.email);
-
+        alert("Welcome to G5 Movies..")
         let ref = document.getElementById('Rcancel');
         ref?.click();
         this.formValue.reset();
@@ -114,12 +114,13 @@ export class HeaderComponent implements OnInit {
       this.message = 'Enter password';
       return;
     }
-    
+
     this.customerService.customerLogin(this.loginData).subscribe((data) => {
       this.auth = data;
       if (this.auth === true) {
         this.login = 1;
         this.productService.login.next(1);
+        this.customerName = this.loginData.email;
         sessionStorage.setItem('cust_email', this.loginData.email);
         this.logService.sendId('cust_email');
         let ref = document.getElementById('Lcancel');

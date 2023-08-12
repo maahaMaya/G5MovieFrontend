@@ -1,19 +1,26 @@
-<!-- Search DropDown -->
+
 <div class="container">
-  <div class="container d-flex">
-    <div class="container d-flex">
-      <nav class="navbar navbar-expand-lg navbar-light col-8">
+  <div class="container d-flex" style="margin: 1vw;">
+    <!-- Search Box -->
+    <div style="margin-left: -6vw; ">
+      <input type="text" class="form-control" name="searchKey" [(ngModel)]="searchKey" (ngModelChange)="Search()"
+        placeholder="Search Product"  style="border: 1px solid rgb(106, 69, 37); border-radius: 4%;"/>
+    </div>
+
+    <!-- Search DropDown -->
+    <div class="container d-flex" style="margin-left: 40vw; width: 4vw;">
+      <nav class="navbar navbar-expand-lg navbar-success col-9">
         <div class="dropdown show">
-          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Filters
+          <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="width: 15vw;">
+            Sorting Movie
           </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
             <div class="navSec">
               <a (click)="getProducts()" id="allProducts" class="navbar-brand">All Products</a>
             </div>
             <div class="navSec">
-              <a (click)="categoryDrama()" id="Drama" class="navbar-brand">Drama</a>
+              <a (click)="categoryDrama()" id="Drama" class="navbar-brand" >Drama</a>
             </div>
             <div class="navSec">
               <a (click)="categoryComedy()" id="Comedy" class="navbar-brand">Comedy</a>
@@ -27,30 +34,25 @@
           </div>
         </div>
       </nav>
-
-      <!-- Search Box -->
-      <div style="margin-right: -20vw">
-        <input type="text" class="form-control" name="searchKey" [(ngModel)]="searchKey" (ngModelChange)="Search()"
-          placeholder="Search Product" />
-      </div>
     </div>
   </div>
 </div>
 
 <!-- Movie Box -->
 <div class="movieCardBox">
-  <mat-card class="movie-card" *ngFor="let movie of products" >
-      <img mat-card-image [src]="movie.imagepath" alt="movieImage" [ngStyle]="{height:'65%'}">
-      <mat-card-content class="movie-card-details" >
-          <p>Cast: {{movie.desc}}</p>
-          <p>Duration: {{movie.durations}} </p>
-          <button *ngIf="login == 0" class="align-self-end mt-auto btn addcart btn-primary" (click)="showToLogin()">
-            Book
-          </button>
-          <button *ngIf="login == 1" class="align-self-end mt-auto btn addcart btn-primary" (click)="addToCart(movie)"
-            id="addToCart">
-            Book
-          </button>
-      </mat-card-content>
+  <mat-card class="movie-card" *ngFor="let movie of products">
+    <img mat-card-image [src]="movie.imagepath" alt="movieImage" [ngStyle]="{height:'330px'}">
+    <mat-card-content class="movie-card-details">
+      <p>Name: {{movie.name}}</p>
+      <p>Price: {{movie.actualPrice | currency:"₹"}}</p>
+      <p>Cast: {{movie.desc}}</p>
+      <p>Duration: {{movie.durations}} </p>
+      <button *ngIf="login == 0" class=" mt-auto btn addcart btn-info" (click)="showToLogin()" style="width: 98%;">
+        Book Movie Ticket
+      </button>
+      <button *ngIf="login == 1" class="align-self-end mt-auto btn addcart btn-primary" (click)="addToCart(movie)" id="addToCart"style="width: 95%; margin-left: 0.1vw;">
+        Book
+      </button>
+    </mat-card-content>
   </mat-card>
 </div>

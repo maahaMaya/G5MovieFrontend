@@ -9,10 +9,12 @@ body {
 .card {
     padding: 30px 25px 35px 50px;
     border-radius: 30px;
-    box-shadow: 0px 4px 8px 0px #B71C1C;
+    box-shadow: 0px 4px 8px 0px #EF5350;
     margin-top: 50px;
     margin-bottom: 50px
 }
+
+
 
 .border-line {
     border-right: 1px solid #BDBDBD
@@ -83,11 +85,11 @@ button:focus {
 }
 
 .btn-red:hover {
-    box-shadow: 0 0 0 2px #EF5350
+    box-shadow: 0 0 0 2px #933b3a
 }
 
 .btn-red:focus {
-    box-shadow: 0 0 0 2px #EF5350 !important
+    box-shadow: 0 0 0 2px #933b3a !important
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {

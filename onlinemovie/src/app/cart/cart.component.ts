@@ -76,11 +76,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeAllCart() {
-    this.cartService.deleteAllCart().subscribe((res) => {
-      this.getCartItemList();
-    });
-  }
 
   addOneCart(id: any, cart: Cart) {
     this.cartService.addOneCart(id, cart).subscribe((res) => {
